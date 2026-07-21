@@ -55,8 +55,8 @@
     /* 立体本 */
     .thick-book {
       width: 100%;
-      max-width: 420px;
-      height: 520px;
+      max-width: 380px; /* デスクトップ時の最大幅を少しスリムに調整 */
+      height: 500px;
       position: relative;
       transform-style: preserve-3d;
       transform: rotateY(-22deg) rotateX(12deg);
@@ -98,7 +98,7 @@
 
     .cover-front h1 {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: var(--gold-light);
       letter-spacing: 2px;
       margin-bottom: 12px;
@@ -124,8 +124,8 @@
 
     .book-pages-side {
       position: absolute;
-      top: 6px; right: -46px;
-      width: 48px; height: calc(100% - 12px);
+      top: 6px; right: -40px;
+      width: 42px; height: calc(100% - 12px);
       background: linear-gradient(to right, #c2b18f 0%, #f4ebd9 10%, #bfa97d 25%, #f4ebd9 40%, #a89267 60%, #f4ebd9 75%, #8a744b 100%);
       background-size: 100% 3px;
       transform: rotateY(90deg);
@@ -135,8 +135,8 @@
 
     .book-pages-bottom {
       position: absolute;
-      bottom: -46px; left: 6px;
-      width: calc(100% - 12px); height: 48px;
+      bottom: -40px; left: 6px;
+      width: calc(100% - 12px); height: 42px;
       background: linear-gradient(to bottom, #c2b18f 0%, #f4ebd9 10%, #bfa97d 25%, #f4ebd9 40%, #a89267 60%, #f4ebd9 75%, #8a744b 100%);
       background-size: 3px 100%;
       transform: rotateX(-90deg);
@@ -149,7 +149,7 @@
       width: 100%; height: 100%;
       background: #1a0e04;
       border-radius: 12px;
-      transform: translateZ(-48px);
+      transform: translateZ(-42px);
       box-shadow: -25px 25px 60px rgba(0,0,0,0.95);
     }
 
@@ -196,8 +196,8 @@
     .door-portal-container.active { opacity: 1; }
 
     .door-frame {
-      width: 320px;
-      height: 480px;
+      width: 300px;
+      height: 450px;
       position: relative;
       transform-style: preserve-3d;
       border: 4px solid var(--gold);
@@ -238,7 +238,7 @@
 
     .wish-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--gold-light);
       text-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-dark);
       margin-bottom: 20px;
@@ -247,7 +247,7 @@
 
     .wish-subtext {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #ffffff;
       text-shadow: 0 0 15px rgba(0,0,0,0.8);
       line-height: 1.8;
@@ -257,7 +257,7 @@
     /* 絵本の中身 */
     .storybook-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 550px;
       height: 100%;
       display: none;
       opacity: 0;
@@ -280,7 +280,7 @@
       background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.7) 0%, rgba(210,185,140,0.3) 100%);
       border: 8px solid #2b1808;
       border-radius: 8px;
-      padding: 35px 30px;
+      padding: 30px 25px;
       width: 100%;
       height: 100%;
       box-shadow: 0 20px 50px rgba(0,0,0,0.8);
@@ -322,7 +322,7 @@
     .page-header h2 {
       font-family: 'Cinzel Decorative', serif;
       color: #3b2312;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .page-body {
@@ -336,7 +336,7 @@
 
     .page-img {
       width: 100%;
-      max-height: 200px;
+      max-height: 180px;
       object-fit: cover;
       border-radius: 4px;
       border: 2px solid var(--gold);
@@ -346,7 +346,7 @@
 
     .page-text::first-letter {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       float: left;
       line-height: 0.8;
       margin-right: 8px;
@@ -354,8 +354,8 @@
     }
 
     .page-text {
-      line-height: 1.9;
-      font-size: 0.95rem;
+      line-height: 1.8;
+      font-size: 0.9rem;
       color: var(--text-color);
     }
 
@@ -372,10 +372,10 @@
       background: #2b1808;
       color: var(--gold-light);
       border: 1px solid var(--gold);
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: 20px;
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -386,7 +386,7 @@
       font-family: 'Cinzel', serif;
       color: #8c6d1f;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     /* 手紙デザイン */
@@ -394,7 +394,7 @@
       background: rgba(255, 255, 255, 0.4);
       border: 2px dashed var(--gold-dark);
       border-radius: 8px;
-      padding: 12px 18px;
+      padding: 10px 14px;
       text-align: center;
       margin-bottom: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -406,7 +406,7 @@
     }
 
     .envelope-note {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #8c6d1f;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -416,8 +416,8 @@
       background: linear-gradient(135deg, #be123c 0%, #881337 100%);
       color: #fff;
       border: 1px solid var(--gold-light);
-      padding: 8px 20px;
-      font-size: 0.85rem;
+      padding: 7px 18px;
+      font-size: 0.8rem;
       font-family: 'Shippori Mincho', serif;
       font-weight: bold;
       border-radius: 25px;
@@ -439,9 +439,9 @@
 
     .lock-container {
       position: relative;
-      width: 85px;
-      height: 85px;
-      margin: 10px 0 20px;
+      width: 80px;
+      height: 80px;
+      margin: 5px 0 15px;
       perspective: 1000px;
       display: flex;
       justify-content: center;
@@ -449,8 +449,8 @@
     }
 
     .brass-plate {
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffe699 0%, #d4af37 45%, #8a6414 80%, #3a2705 100%);
       border: 3px solid #fce8a6;
@@ -518,8 +518,8 @@
       background: linear-gradient(135deg, #2b1808 0%, #4a2c11 100%);
       color: var(--gold-light);
       border: 2px solid var(--gold);
-      padding: 10px 28px;
-      font-size: 0.95rem;
+      padding: 10px 24px;
+      font-size: 0.9rem;
       font-family: 'Shippori Mincho', serif;
       border-radius: 30px;
       cursor: pointer;
@@ -548,9 +548,10 @@
       background: var(--paper-bg);
       border: 6px solid #2b1808;
       outline: 2px solid var(--gold);
-      padding: 35px 25px;
+      padding: 30px 20px;
       border-radius: 8px;
       max-width: 480px;
+      width: 100%;
       text-align: center;
       box-shadow: 0 0 50px rgba(229, 193, 88, 0.5);
       transform: scale(0.8) translateY(30px);
@@ -558,15 +559,112 @@
     }
 
     .modal.show .modal-content { transform: scale(1) translateY(0); }
-    .modal-content h3 { font-family: 'Cinzel Decorative', serif; color: #3b2312; font-size: 1.5rem; margin-bottom: 15px; }
-    .modal-content p { line-height: 2; margin-bottom: 25px; text-align: left; font-size: 0.9rem; }
+    .modal-content h3 { font-family: 'Cinzel Decorative', serif; color: #3b2312; font-size: 1.3rem; margin-bottom: 12px; }
+    .modal-content p { line-height: 1.8; margin-bottom: 20px; text-align: left; font-size: 0.85rem; }
 
     .close-btn {
       background: #2b1808; color: var(--gold-light); border: 1px solid var(--gold);
-      padding: 10px 28px; border-radius: 20px; cursor: pointer; font-family: 'Shippori Mincho', serif;
-      font-weight: bold; transition: all 0.2s;
+      padding: 9px 24px; border-radius: 20px; cursor: pointer; font-family: 'Shippori Mincho', serif;
+      font-weight: bold; font-size: 0.85rem; transition: all 0.2s;
     }
     .close-btn:hover { background: var(--gold); color: #1a0e04; }
+
+    /* ========================================================
+       📱 スマホ向けレスポンシブ調整 (幅600px以下)
+    ======================================================== */
+    @media (max-width: 600px) {
+      .stage {
+        height: 480px;
+      }
+
+      /* 立体本をスマートフォン画面に合わせてスリム化 */
+      .thick-book {
+        max-width: 270px;
+        height: 380px;
+        transform: rotateY(-18deg) rotateX(10deg);
+      }
+
+      .cover-front {
+        padding: 25px 15px;
+        border-width: 6px;
+      }
+
+      .cover-symbol {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      .cover-front h1 {
+        font-size: 1.35rem;
+        margin-bottom: 8px;
+      }
+
+      .cover-front p {
+        font-size: 0.75rem;
+        margin-bottom: 25px;
+      }
+
+      .open-btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+
+      .book-pages-side {
+        right: -30px;
+        width: 32px;
+      }
+
+      .book-pages-bottom {
+        bottom: -30px;
+        height: 32px;
+      }
+
+      .book-back {
+        transform: translateZ(-32px);
+      }
+
+      /* 本文エリアのスマホ調整 */
+      .storybook-container {
+        max-width: 100%;
+        height: 460px;
+      }
+
+      .page-card {
+        padding: 20px 15px;
+        border-width: 5px;
+      }
+
+      .page-header h2 {
+        font-size: 1.1rem;
+      }
+
+      .page-img {
+        max-height: 130px;
+        margin-bottom: 10px;
+      }
+
+      .page-text {
+        font-size: 0.82rem;
+        line-height: 1.7;
+      }
+
+      .page-text::first-letter {
+        font-size: 2.2rem;
+      }
+
+      .door-frame {
+        width: 240px;
+        height: 360px;
+      }
+
+      .wish-title {
+        font-size: 1.5rem;
+      }
+
+      .wish-subtext {
+        font-size: 0.95rem;
+      }
+    }
 
   </style>
 </head>
@@ -867,8 +965,11 @@
         glow.style.opacity = '0';
 
         setTimeout(() => {
+          const isMobile = window.innerWidth <= 600;
           thickBook.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
-          thickBook.style.transform = 'rotateY(-22deg) rotateX(12deg) scale(1)';
+          thickBook.style.transform = isMobile 
+            ? 'rotateY(-18deg) rotateX(10deg) scale(1)' 
+            : 'rotateY(-22deg) rotateX(12deg) scale(1)';
         }, 100);
 
       }, 6800);
@@ -905,8 +1006,11 @@
         }, 50);
 
         setTimeout(() => {
+          const isMobile = window.innerWidth <= 600;
           thickBook.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
-          thickBook.style.transform = 'rotateY(-22deg) rotateX(12deg)';
+          thickBook.style.transform = isMobile 
+            ? 'rotateY(-18deg) rotateX(10deg)' 
+            : 'rotateY(-22deg) rotateX(12deg)';
         }, 1100);
 
       }, 500);
