@@ -930,29 +930,31 @@
 
     /* スマホ向け */
     @media (max-width: 600px) {
-      .stage { height: 500px; }
-      .thick-book { max-width: 270px; height: 390px; }
+      .stage { height: 550px; }
+      .thick-book { max-width: 270px; height: 420px; }
       .cover-front { padding: 20px 12px; }
       .cover-symbol { font-size: 2rem; margin-bottom: 6px; }
       .cover-front h1 { font-size: 1.25rem; margin-bottom: 6px; }
       .cover-front p { font-size: 0.72rem; margin-bottom: 20px; }
       .open-btn { padding: 9px 20px; font-size: 0.85rem; }
 
-      .storybook-container { max-width: 100%; height: 470px; }
-      .page-card { padding: 14px 10px; }
-      .page-header h2 { font-size: 1rem; }
+      .storybook-container { max-width: 100%; height: 525px; }
+      .page-card { padding: 12px 10px; }
+      .page-header h2 { font-size: 1rem; margin-bottom: 4px; padding-bottom: 4px; }
 
-      .page-text { font-size: 0.8rem; line-height: 1.6; }
-      .page-text::first-letter { font-size: 1.8rem; margin-right: 4px; }
+      .page-text { font-size: 0.78rem; line-height: 1.55; }
+      .page-text::first-letter { font-size: 1.6rem; margin-right: 4px; }
       .page-img { max-width: 210px; max-height: 120px; margin-bottom: 8px; }
 
       .photo-cross-stage { height: 140px; }
       .past-photo-card { width: 95px; height: 120px; }
       .big-back-heart { font-size: 11rem; }
 
-      .photo-grid-9 { max-width: 250px; gap: 4px; }
+      /* スマホ向け2ページ目グリッド微調整 (見切れ防止) */
+      .photo-grid-9 { max-width: 230px; gap: 3px; margin: 0 auto 6px auto; }
+      .page2-text { font-size: 0.76rem; line-height: 1.5; }
 
-      .page-story-text { font-size: 0.85rem; margin-bottom: 6px; }
+      .page-story-text { font-size: 0.82rem; margin-bottom: 4px; }
 
       .envelope-wrapper { width: 230px; height: 140px; margin-bottom: 10px; }
       .flap { border-left-width: 115px; border-right-width: 115px; border-top-width: 80px; }
