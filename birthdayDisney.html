@@ -457,10 +457,11 @@
       text-shadow: 1px 1px 2px rgba(145, 111, 26, 0.2);
     }
 
+    /* 3ページ目の写真サイズを大きく修正（PC向け） */
     .page-img {
       width: 100%;
-      max-width: 280px;
-      max-height: 165px;
+      max-width: 350px;
+      max-height: 220px;
       object-fit: cover;
       border-radius: 6px;
       border: 2px solid var(--gold);
@@ -1015,7 +1016,9 @@
 
       .page-text { font-size: 0.74rem; line-height: 1.4; }
       .page-text::first-letter { font-size: 1.4rem; margin-right: 3px; }
-      .page-img { max-width: 170px; max-height: 105px; margin-bottom: 6px; }
+      
+      /* 3ページ目の写真サイズを大きく修正（スマホ向け） */
+      .page-img { max-width: 220px; max-height: 140px; margin-bottom: 6px; }
 
       .photo-cross-stage { height: 115px; }
       .past-photo-card { width: 85px; height: 110px; }
@@ -1211,7 +1214,6 @@
                       お誕生日おめでとう！🍰あっという間の29歳！<br>
                       （まだだけどねとか言わないの笑）<br><br>
 
-                      
                       こうして特別な日をさいかと一緒にお祝いできて、心から幸せに思っています。<br><br>
 
                       さいかと出会えて、一緒に入れて本当に毎日が楽しくて幸せな日々を過ごせてます。<br>
@@ -1230,7 +1232,7 @@
 
                       照れやすいところが大好き。<br>
                       今もすごい照れてるんだろうな。<br>
-                      俺が「大好き」と言うといつも嬉しそうに照れてくれるよね。そして、さいかもちゃんと逃げずに気持ちを伝えてくれるよね。本当に嬉しい。<br><br>
+                      俺が「大好き」と言うといつも嬉しそうに照れてくれるよね。そして, さいかもちゃんと逃げずに気持ちを伝えてくれるよね。本当に嬉しい。<br><br>
 
                       なんか手紙って照れくさいかも。<br>
                       というか手紙なんて人生で初めて書いたかも。<br>
@@ -1239,7 +1241,6 @@
                       本当にさいかと出会て人生が変わりました。<br>
                       気づいたらさいかの笑顔やさいかとの思い出とかを考えちゃってます。<br><br>
 
-                      
                       本当に本当に幸せにしてくれてありがとう。<br>
                       好きになってくれてありがとう。<br>
                       感謝してもし足りないよ。<br><br>
@@ -1248,8 +1249,6 @@
                       これから先もずっと変わらず楽しくて幸せな日々を一緒に過ごしていこうね！<br><br>
 
                       この世で1番さいかのことが本気で大好きだよ！！！
-                      
-                      
                     </p>
                     <div class="letter-footer">ほだかより</div>
                   </div>
@@ -1378,7 +1377,7 @@
         dreamTimeoutIds.push(tId);
       }
 
-      // 最後の15枚目の写真が消えた後（14 * 2000ms + 6000ms = 34000ms）の1秒後（合計35秒後）に本の中に戻る
+      // 最後の15枚目の写真が消えた後の1秒後に本の中に戻る
       const finishId = setTimeout(() => {
         const dreamOverlay = document.getElementById('dreamSpaceOverlay');
         const glow = document.getElementById('glowOverlay');
