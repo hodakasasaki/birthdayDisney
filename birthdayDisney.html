@@ -181,7 +181,7 @@
       backface-visibility: hidden;
     }
 
-    /* 光の演出 */
+    /* 光の演出・オーバーレイ */
     .glow-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -190,6 +190,83 @@
       pointer-events: none;
       z-index: 150;
       transition: opacity 1.2s ease;
+    }
+
+    /* 3ページ目専用：夢の全画面空間レイヤー */
+    .dream-space-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 50% 50%, #1a0d26 0%, #050208 85%);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .dream-space-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 夢の中の6カ所の写真出現スロット */
+    .dream-slot {
+      position: absolute;
+      width: 160px;
+      height: 200px;
+      padding: 8px 8px 24px 8px;
+      background: #fff;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 30px rgba(229, 193, 88, 0.5);
+      border-radius: 4px;
+      opacity: 0;
+      transform: scale(0.5) translateY(30px);
+      transition: none;
+    }
+
+    .dream-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    /* 夢のスロット配置場所（6カ所） */
+    .dream-slot-1 { top: 12%; left: 15%; transform: rotate(-8deg) scale(0.5); }
+    .dream-slot-2 { top: 15%; right: 15%; transform: rotate(10deg) scale(0.5); }
+    .dream-slot-3 { top: 40%; left: 8%; transform: rotate(5deg) scale(0.5); }
+    .dream-slot-4 { top: 42%; right: 8%; transform: rotate(-6deg) scale(0.5); }
+    .dream-slot-5 { bottom: 12%; left: 22%; transform: rotate(-4deg) scale(0.5); }
+    .dream-slot-6 { bottom: 12%; right: 22%; transform: rotate(7deg) scale(0.5); }
+
+    .dream-slot.show-dream-photo {
+      animation: dreamPhotoFloat 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes dreamPhotoFloat {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(40px);
+        filter: blur(4px);
+      }
+      15% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0px);
+        filter: blur(0px);
+      }
+      85% {
+        opacity: 1;
+        transform: scale(1) translateY(-15px);
+        filter: blur(0px);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.15) translateY(-35px);
+        filter: blur(6px);
+      }
     }
 
     .door-portal-container {
@@ -388,6 +465,11 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       margin-bottom: 12px;
       display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .page-img:hover {
+      transform: scale(1.03);
     }
 
     /* 1ページ目演出（隣り合わせの2枚の写真） */
@@ -472,7 +554,7 @@
       transform: translateY(0);
     }
 
-    /* 2ページ目：9枚グリッド（PC向けサイズ・上部配置） */
+    /* 2ページ目：9枚グリッド */
     .photo-grid-9 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -687,20 +769,10 @@
         z-index 0s 0.3s;
     }
 
-    .letter::-webkit-scrollbar {
-      width: 6px;
-    }
-    .letter::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.04);
-      border-radius: 3px;
-    }
-    .letter::-webkit-scrollbar-thumb {
-      background: rgba(140, 109, 31, 0.4);
-      border-radius: 3px;
-    }
-    .letter::-webkit-scrollbar-thumb:hover {
-      background: rgba(140, 109, 31, 0.7);
-    }
+    .letter::-webkit-scrollbar { width: 6px; }
+    .letter::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); border-radius: 3px; }
+    .letter::-webkit-scrollbar-thumb { background: rgba(140, 109, 31, 0.4); border-radius: 3px; }
+    .letter::-webkit-scrollbar-thumb:hover { background: rgba(140, 109, 31, 0.7); }
 
     .letter-content {
       opacity: 0.2;
@@ -754,11 +826,8 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    .envelope-wrapper.is-open .letter-content {
-      opacity: 1;
-    }
+    .envelope-wrapper.is-open .letter-content { opacity: 1; }
 
-    /* 手紙の外にあるボタン用のコンテナ */
     .letter-action-container {
       position: relative;
       z-index: 25;
@@ -785,7 +854,6 @@
       box-shadow: 0 8px 22px rgba(190, 18, 60, 0.6);
     }
 
-    /* 手紙が開いたとき専用：手紙ボックスの外（下部）に完全に固定表示する「手紙をたたむ」ボタン */
     .close-letter-outside-btn {
       position: absolute;
       bottom: 12px;
@@ -928,7 +996,7 @@
     }
     .magic-key-btn:hover { transform: scale(1.05); background: var(--gold); color: #1a0e04; }
 
-    /* スマホ向け（高さをコンパクトにしつつ、2ページ目の写真を大きくして上に配置、テキストを他ページと同じサイズに統一） */
+    /* スマホ向けレスポンシブ微調整 */
     @media (max-width: 600px) {
       .stage { height: 480px; }
       .thick-book { max-width: 255px; height: 380px; }
@@ -949,15 +1017,10 @@
 
       .photo-cross-stage { height: 115px; }
       .past-photo-card { width: 85px; height: 110px; }
-      .photo-cross-stage.anim-start .photo-left {
-        transform: translateX(-48px) rotate(-4deg);
-      }
-      .photo-cross-stage.anim-start .photo-right {
-        transform: translateX(48px) rotate(4deg);
-      }
+      .photo-cross-stage.anim-start .photo-left { transform: translateX(-48px) rotate(-4deg); }
+      .photo-cross-stage.anim-start .photo-right { transform: translateX(48px) rotate(4deg); }
       .big-back-heart { font-size: 9rem; }
 
-      /* スマホ向け2ページ目グリッド：写真を大きくして上に配置、テキストサイズを他のページ（.page-textのスマホサイズ）と完全に一致させる */
       .photo-grid-9 { max-width: 235px; gap: 3px; margin: -6px auto 4px auto; }
       .grid-photo-item { padding: 1px; border-width: 1px; }
       .page2-text { font-size: 0.74rem; line-height: 1.4; }
@@ -967,7 +1030,6 @@
       .page-number { font-size: 0.82rem; }
 
       .page-story-text { font-size: 0.78rem; margin-bottom: 2px; }
-
       .envelope-wrapper { width: 210px; height: 130px; margin-bottom: 6px; }
       .flap { border-left-width: 105px; border-right-width: 105px; border-top-width: 72px; }
       .pocket { border-left-width: 105px; border-right-width: 105px; border-bottom-width: 72px; }
@@ -975,11 +1037,9 @@
       .letter { width: 190px; height: 105px; left: 10px; bottom: 4px; padding: 10px; }
       
       .envelope-wrapper.is-open .letter {
-        top: 43%;
-        left: 50%;
+        top: 43%; left: 50%;
         transform: translate(-50%, -50%);
-        width: 255px;
-        height: 220px;
+        width: 255px; height: 220px;
       }
       .letter-body { font-size: 0.76rem; line-height: 1.5; }
       .read-letter-btn { padding: 6px 16px; font-size: 0.78rem; }
@@ -987,13 +1047,30 @@
       .door-frame { width: 200px; height: 310px; }
       .wish-title { font-size: 1.25rem; }
       .wish-subtext { font-size: 0.82rem; }
-    }
 
+      .dream-slot { width: 110px; height: 140px; padding: 5px 5px 18px 5px; }
+      .dream-slot-1 { top: 10%; left: 8%; }
+      .dream-slot-2 { top: 12%; right: 8%; }
+      .dream-slot-3 { top: 38%; left: 5%; }
+      .dream-slot-4 { top: 40%; right: 5%; }
+      .dream-slot-5 { bottom: 8%; left: 12%; }
+      .dream-slot-6 { bottom: 8%; right: 12%; }
+    }
   </style>
 </head>
 <body>
 
   <div class="glow-overlay" id="glowOverlay"></div>
+
+  <!-- 3ページ目専用：夢の空間オーバーレイ（15枚の写真がランダムに6カ所のスロットで次々と浮かぶ） -->
+  <div class="dream-space-overlay" id="dreamSpaceOverlay">
+    <div class="dream-slot dream-slot-1" id="dreamSlot1"><img id="dreamImg1" src="" alt="夢の写真1"></div>
+    <div class="dream-slot dream-slot-2" id="dreamSlot2"><img id="dreamImg2" src="" alt="夢の写真2"></div>
+    <div class="dream-slot dream-slot-3" id="dreamSlot3"><img id="dreamImg3" src="" alt="夢の写真3"></div>
+    <div class="dream-slot dream-slot-4" id="dreamSlot4"><img id="dreamImg4" src="" alt="夢の写真4"></div>
+    <div class="dream-slot dream-slot-5" id="dreamSlot5"><img id="dreamImg5" src="" alt="夢の写真5"></div>
+    <div class="dream-slot dream-slot-6" id="dreamSlot6"><img id="dreamImg6" src="" alt="夢の写真6"></div>
+  </div>
 
   <div class="door-portal-container" id="doorPortal">
     <div class="door-frame">
@@ -1093,15 +1170,15 @@
         </div>
       </div>
 
-      <!-- 3ページ目 -->
+      <!-- 3ページ目（クリックまたは自動で夢の空間へ突入） -->
       <div class="page-card" id="page-3">
         <div class="page-header">
-          <h2>Chapter III : Today</h2>
+          <h2>Chapter III : Dream Journey</h2>
         </div>
         <div class="page-body">
-          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" class="page-img" alt="Today">
+          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" class="page-img" alt="Dream Portal" onclick="triggerDreamSequence()">
           <p class="page-text">
-            そして今日、こうして特別な場所で誕生日をお祝いできて本当に嬉しいです。いつもたくさんの優しさをくれてありがとう。
+            写真の中に吸い込まれるような、不思議な夢の世界へようこそ。ここから先の美しい記憶の断片を、一緒に覗いてみましょう。（写真をクリックしても体験できます）
           </p>
         </div>
         <div class="page-footer">
@@ -1125,7 +1202,6 @@
                 <div class="flap"></div>
                 <div class="seal">★</div>
                 
-                <!-- 飛び出す手紙本文 -->
                 <div class="letter">
                   <div class="letter-content">
                     <div class="letter-header">大好きな〇〇へ</div>
@@ -1144,7 +1220,6 @@
               </div>
             </div>
 
-            <!-- 手紙の外（封筒の下部・および手紙展開時の外側）に配置するボタン -->
             <div class="letter-action-container">
               <button class="read-letter-btn" id="openLetterBtn" onclick="toggleEnvelopeLetter()">✉️ 手紙を開く</button>
             </div>
@@ -1194,7 +1269,103 @@
   </div>
 
   <script>
-    /* 4ページ目：手紙の開閉アニメーションとボタン切り替え制御 */
+    /* 15枚の夢の写真リスト */
+    const dreamPhotos = [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+    ];
+
+    let dreamTimeoutIds = [];
+    let isDreamPlaying = false;
+
+    /* 3ページ目の夢の演出制御 */
+    function triggerDreamSequence() {
+      if (isDreamPlaying) return;
+      isDreamPlaying = true;
+
+      const stage = document.getElementById('stage');
+      const dreamOverlay = document.getElementById('dreamSpaceOverlay');
+
+      // ① 3ページ目が開かれてから最初の2秒間は何もしない（ここでは2秒待ってから引き込み演出を開始）
+      setTimeout(() => {
+        // ② 2秒後、写真の中に引きずりこまれる演出（ステージを拡大＆ブラー）
+        stage.classList.add('walk-through');
+
+        setTimeout(() => {
+          // ③ 本のページを消して全面夢の中に切り替え
+          dreamOverlay.classList.add('active');
+          stage.classList.remove('walk-through');
+
+          // ④ 夢の中での15枚の写真の連続演出開始
+          runDreamPhotosAnimation();
+
+        }, 1200); // 引き込み演出の遷移時間
+
+      }, 2000); // 最初の静止2秒間
+    }
+
+    /* 15枚の写真を6カ所のスロットで次々と浮かび上がらせて消す演出ロジック */
+    function runDreamPhotosAnimation() {
+      // 1枚あたり浮き上がって消える時間: 6秒
+      // 次の写真が浮かび上がるまでの間隔: 3秒
+      // 15枚目終了までの計算: 最初の0秒からスタートし、各インデックス毎に 3000ms ずつ遅延。
+      for (let i = 0; i < 15; i++) {
+        const tId = setTimeout(() => {
+          const slotIndex = (i % 6) + 1; // 6カ所のスロットを循環
+          const slotElem = document.getElementById(`dreamSlot${slotIndex}`);
+          const imgElem = document.getElementById(`dreamImg${slotIndex}`);
+
+          if (slotElem && imgElem) {
+            // 写真をセット
+            imgElem.src = dreamPhotos[i];
+
+            // 一度クラスを外して再付与し、アニメーションを確実にトリガー
+            slotElem.classList.remove('show-dream-photo');
+            void slotElem.offsetWidth; // reflow
+            slotElem.classList.add('show-dream-photo');
+          }
+        }, i * 3000); // 3秒おきに次が浮かび上がる
+
+        dreamTimeoutIds.push(tId);
+      }
+
+      // 最後の15枚目の写真が消えた後（14 * 3000ms + 6000ms = 48000ms）の2秒後（合計50秒後）に、本の中に戻って3ページ目を表示する
+      const finishId = setTimeout(() => {
+        const dreamOverlay = document.getElementById('dreamSpaceOverlay');
+        const glow = document.getElementById('glowOverlay');
+        const stage = document.getElementById('stage');
+
+        // 光の演出で本へ戻る
+        glow.style.opacity = '1';
+
+        setTimeout(() => {
+          dreamOverlay.classList.remove('active');
+          glow.style.opacity = '0';
+          isDreamPlaying = false;
+
+          // 3ページ目を確実に表示状態にする
+          goToPageDirectly(3);
+        }, 1000);
+
+      }, (14 * 3000) + 6000 + 2000);
+
+      dreamTimeoutIds.push(finishId);
+    }
+
+    /* 手紙の開閉アニメーション */
     function toggleEnvelopeLetter() {
       const wrapper = document.getElementById('envelopeWrapper');
       const openBtn = document.getElementById('openLetterBtn');
@@ -1222,6 +1393,12 @@
     }
 
     function resetPagesToFirst() {
+      // 夢のタイマーをすべてクリア
+      dreamTimeoutIds.forEach(id => clearTimeout(id));
+      dreamTimeoutIds = [];
+      isDreamPlaying = false;
+      document.getElementById('dreamSpaceOverlay').classList.remove('active');
+
       for (let i = 1; i <= 5; i++) {
         const page = document.getElementById(`page-${i}`);
         if (page) page.classList.remove('current', 'turned-left');
@@ -1251,7 +1428,7 @@
       const textElem = document.getElementById('page1Text');
 
       setTimeout(() => { photoStage.classList.add('anim-start'); }, 400);
-      // 写真が隣り合わせになるタイミング（400ms + 2500ms = 2900ms）に合わせてハートを表示し、2秒間持続させる
+      // 写真が隣り合わせになるタイミング（400ms + 2500ms = 2900ms）に合わせてハートを表示し、2秒間持続
       setTimeout(() => { heartElem.classList.add('show-heart'); }, 2900);
 
       // ハートが消えた後（2900ms + 2000ms = 4900ms）にテキストを表示
@@ -1333,6 +1510,9 @@
       if (next === 2) {
         resetPage2Animation();
         playPage2Animation();
+      } else if (next === 3) {
+        // 3ページ目が開かれたら自動的に夢の演出シーケンスを開始
+        triggerDreamSequence();
       }
     }
 
@@ -1354,6 +1534,20 @@
       } else if (prev === 2) {
         resetPage2Animation();
         playPage2Animation();
+      } else if (prev === 3) {
+        triggerDreamSequence();
+      }
+    }
+
+    function goToPageDirectly(pageNum) {
+      for (let i = 1; i <= 5; i++) {
+        const p = document.getElementById(`page-${i}`);
+        p.classList.remove('current', 'turned-left');
+        if (i < pageNum) {
+          p.classList.add('turned-left');
+        } else if (i === pageNum) {
+          p.classList.add('current');
+        }
       }
     }
 
