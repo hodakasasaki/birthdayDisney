@@ -1319,7 +1319,7 @@
       }, 2000); // 最初の静止2秒間
     }
 
-    /* 15枚の写真の連続演出ロジック（次が出るまでの間隔を2秒に変更） */
+    /* 15枚の写真の連続演出ロジック（次が出るまでの間隔は2秒） */
     function runDreamPhotosAnimation() {
       for (let i = 0; i < 15; i++) {
         const tId = setTimeout(() => {
@@ -1341,7 +1341,7 @@
         dreamTimeoutIds.push(tId);
       }
 
-      // 最後の15枚目の写真が消えた後（14 * 2000ms + 6000ms = 34000ms）の2秒後（合計36秒後）に本の中に戻る
+      // 最後の15枚目の写真が消えた後（14 * 2000ms + 6000ms = 34000ms）の1秒後（合計35秒後）に本の中に戻る
       const finishId = setTimeout(() => {
         const dreamOverlay = document.getElementById('dreamSpaceOverlay');
         const glow = document.getElementById('glowOverlay');
@@ -1358,7 +1358,7 @@
           goToPageDirectly(3);
         }, 1000);
 
-      }, (14 * 2000) + 6000 + 2000);
+      }, (14 * 2000) + 6000 + 1000);
 
       dreamTimeoutIds.push(finishId);
     }
